@@ -1,23 +1,38 @@
 class TweetsController < ApplicationController
 
   get '/tweets' do
-    erb :'/tweets/tweets'
+    if logged_in?
+      @tweets = Tweet.all
+      erb :'/tweets/tweets'
+    else
+      redirect '/login'
+    end
   end
   
   get '/tweets/new' do
-    erb :'/tweets/new'
+    logged_in? ? (erb :'/tweets/new') : (redirect '/login')
+  end
+  
+  post '/tweets' do
+    
   end
   
   get '/tweets/:id/edit' do
+    
     erb :'/tweets/edit_tweet'
   end
   
-  post '/tweets/:id/edit' do
-    erb :'/tweets/show'
+  get '/tweets/:id' do
+    
+    erb :'/tweets/show_tweet'
   end
   
-  get '/tweets/:id' do
-    erb :'/tweets/show_tweet'
+  patch '/tweets/:id' do
+    
+  end
+  
+  delete '/tweets/:id/delete' do
+    
   end
 
 end
